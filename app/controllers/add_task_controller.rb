@@ -4,7 +4,6 @@ class AddTaskController < UIViewController
 
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
     view.contentMode = UIViewContentModeRedraw
-
     view.backgroundColor = UIColor.whiteColor
     self.title = "Add Task"
     view.addSubview generate_text_field

@@ -3,17 +3,9 @@ class ToDoListController < UIViewController
     super
 
     self.title = "To-Do List"
-    @table = UITableView.alloc.initWithFrame(view.bounds).tap do |table|
-      table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
-      table.contentMode = UIViewContentModeRedraw
-    end
+    @table = todolist_table
     view.addSubview @table
-    @table.dataSource = self
-    @table.delegate = self
-
-    @todolist = ToDoList.load_from_defaults || ToDoList.new
-    @data = @todolist.tasks
-
+    load_todolist
     navigationItem.rightBarButtonItem = right_button
   end
 
@@ -22,9 +14,7 @@ class ToDoListController < UIViewController
   end
 
   def viewDidAppear(animated)
-    @todolist = ToDoList.load_from_defaults || ToDoList.new
-    @data = @todolist.tasks
-    @table.reloadData
+    load_todolist
   end
 
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
@@ -79,5 +69,20 @@ class ToDoListController < UIViewController
       target:self,
       action:'add_task'
     )
+  end
+
+  def load_todolist
+    @todolist = ToDoList.load_from_defaults || ToDoList.new
+    @data = @todolist.tasks
+    @table.reloadData
+  end
+
+  def todolist_table
+    UITableView.alloc.initWithFrame(view.bounds).tap do |table|
+      table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
+      table.contentMode = UIViewContentModeRedraw
+      table.dataSource = self
+      table.delegate = self
+    end
   end
 end

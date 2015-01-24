@@ -2,7 +2,7 @@
 class ToDoList
   attr_accessor :tasks
 
-  DEFAULTS = NSUserDefaults.standardUserDefaults
+  include Saveable
 
   def initialize(*)
     self.tasks = []
