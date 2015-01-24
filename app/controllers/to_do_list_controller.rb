@@ -27,7 +27,7 @@ class ToDoListController < UIViewController
     @table.reloadData
   end
 
-  def tableView(tableView, cellForRowAtIndexPath: indexPath)
+  def tableView(tableView, cellForRowAtIndexPath:indexPath)
     @reuseIdentifier ||= 'CELL_IDENTIFIER'
 
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) ||

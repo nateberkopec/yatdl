@@ -15,3 +15,18 @@ Style/SpaceAfterColon:
 
 Style/VariableName:
   Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  '[]'
+    '%q': '[]'
+    '%Q': '[]'
+    '%w': '[]'
+    '%W': '[]'
+    '%x': '[]'
+
+Metrics/LineLength:
+  Max: 99

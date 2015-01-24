@@ -1,13 +1,14 @@
+# A Task - has a name and description
 class Task
   attr_accessor :name
   attr_accessor :description
   attr_accessor :id
 
   def initialize(attributes = {})
-    attributes.each { |key, value|
-      self.send("#{key}=", value)
-    }
-    self.id ||= (0..16).to_a.map{|a| rand(16).to_s(16)}.join
+    attributes.each do |key, value|
+      send("#{key}=", value)
+    end
+    self.id ||= (0..16).to_a.map { |a| rand(16).to_s(16) }.join
   end
 
   def self.defaults
@@ -22,7 +23,7 @@ class Task
     if defaults.dictionaryRepresentation.keys.include?("task_#{id}")
       NSKeyedUnarchiver.unarchiveObjectWithData(defaults["task_#{id}"])
     else
-      raise "Task cannot be found"
+      fail "Task cannot be found"
     end
   end
 

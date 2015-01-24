@@ -1,3 +1,4 @@
+# Container for a list of Tasks
 class ToDoList
   attr_accessor :tasks
 
