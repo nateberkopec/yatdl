@@ -1,6 +1,8 @@
 # Container for a list of Tasks
 class ToDoList
-  attr_accessor :tasks
+  attr_accessor :tasks, :id
+
+  PROPERTIES = %w[task_ids]
 
   include Saveable
 
@@ -17,14 +19,11 @@ class ToDoList
     NSKeyedUnarchiver.unarchiveObjectWithData(DEFAULTS["to_do_list"])
   end
 
-  def initWithCoder(decoder)
-    ids = decoder.decodeObjectForKey("task_ids")
-    self.tasks = ids.map { |id| Task.load_from_defaults(id) }
-    self
+  def task_ids
+    tasks.map(&:id)
   end
 
-  # called when saving an object to NSUserDefaults
-  def encodeWithCoder(encoder)
-    encoder.encodeObject(tasks.map(&:id), forKey: "task_ids")
+  def task_ids=(ids)
+    self.tasks = ids.map { |id| Task.load_from_defaults(id) }
   end
 end
